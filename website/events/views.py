@@ -3,13 +3,13 @@ from .models import*
 from esummit.models import Year_Detail
 import datetime
 from json import dumps
-from django.utils.timezone import utc   
+from datetime import timezone 
 
 def event(request):
     
     day=datetime.datetime.now()
     tdelta=datetime.timedelta(days=45)
-    now = datetime.datetime.utcnow().replace(tzinfo=utc)
+    now = datetime.datetime.utcnow().replace(tzinfo=timezone.utc)
 
     ongoing_event=Event.objects.filter(start_date__lte=now,end_date__gte=now)
     upcoming_event=Event.objects.filter(start_date__gt=now,start_date__lte=now+tdelta).exclude(start_date__lte=now,end_date__gte=now)
@@ -77,7 +77,7 @@ def eventdetails(request, id):
         number_of_images = len(images)
 
         tdelta=datetime.timedelta(days=45)
-        now = datetime.datetime.utcnow().replace(tzinfo=utc)
+        now = datetime.datetime.utcnow().replace(tzinfo=timezone.utc)
         ongoing_event=Event.objects.filter(start_date__lte=now,end_date__gte=now)
         upcoming_event=Event.objects.filter(start_date__gt=now,start_date__lte=now+tdelta).exclude(start_date__lte=now,end_date__gte=now)
 
