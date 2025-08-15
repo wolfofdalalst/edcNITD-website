@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+
+# Env
+.env
+venv/
+.env.*
+
+# VCS
+.git/
+.gitignore
+
+# Django collected/static and media (mounted as volumes instead)
+website/staticfiles/
+website/media/
+
+# Node
+node_modules/
+
+# Editor/OS
+*.log
+*.swp
+.DS_Store
+.idea/
+.vscode/
