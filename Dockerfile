@@ -29,4 +29,4 @@ USER appuser
 EXPOSE 8000
 
 # Default command (can be overridden by docker-compose)
-CMD ["gunicorn", "website.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
+CMD ["gunicorn", "website.wsgi:application", "--chdir", "/app/website", "--bind", "0.0.0.0:8000", "--workers", "3"]
