@@ -1,8 +1,8 @@
 services:
   django:
     build: .
-    network_mode: host
     container_name: django
+    restart: unless-stopped
     volumes:
       - ./website/db.sqlite3:/app/website/db.sqlite3
       - static_volume:/app/website/staticfiles
@@ -11,6 +11,7 @@ services:
       - .env
     environment:
       - DJANGO_SETTINGS_MODULE=website.settings
+      - DJANGO_ENV=production
     stdin_open: true
     tty: true
 
@@ -18,13 +19,31 @@ services:
     build:
       context: ./nginx
     container_name: nginx
+    restart: unless-stopped
+    environment:
+      - SERVER_NAME=edcnitd.co.in
     volumes:
       - static_volume:/app/website/staticfiles
       - media_volume:/app/website/media
-    network_mode: host
+      - certbot_certs:/etc/letsencrypt
+      - certbot_webroot:/var/www/certbot
+    ports:
+      - "80:80"
+      - "443:443"
     depends_on:
       - django
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot_certs:/etc/letsencrypt
+      - certbot_webroot:/var/www/certbot
+    profiles:
+      - certs
 
 volumes:
   static_volume:
   media_volume:
+  certbot_certs:
+  certbot_webroot:

@@ -2,6 +2,11 @@ FROM nginx:alpine
 
 RUN rm /etc/nginx/conf.d/default.conf
 
-COPY default.conf /etc/nginx/conf.d/default.conf
+# Copy template configs and entrypoint
+COPY templates/ /etc/nginx/templates/
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-EXPOSE 80
+EXPOSE 80 443
+
+ENTRYPOINT ["/entrypoint.sh"]

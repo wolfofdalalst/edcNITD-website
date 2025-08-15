@@ -21,7 +21,7 @@ python manage.py makemigrations
 
 # Apply migrations
 echo "Applying migrations..."
-python manage.py migrate
+python manage.py migrate --run-syncdb
 
 # Collect static files
 echo "Collecting static files..."
