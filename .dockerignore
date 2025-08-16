@@ -17,6 +17,8 @@ venv/
 # Django collected/static and media (mounted as volumes instead)
 website/staticfiles/
 website/media/
+nginx/certs/
+nginx/certbot-www/
 
 # Node
 node_modules/
