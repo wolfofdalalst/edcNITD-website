@@ -6,7 +6,7 @@ services:
     container_name: edc_web
     command: gunicorn website.wsgi:application --chdir /app/website --bind 0.0.0.0:8000 --workers 3
     volumes:
-      - ./website:/app/website:ro
+      - ./website:/app/website
       - ./website/staticfiles:/app/website/staticfiles
       - ./website/media:/app/website/media
       - ./website/db.sqlite3:/app/website/db.sqlite3
